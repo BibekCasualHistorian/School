@@ -57,7 +57,7 @@ export const {
       }
 
       // we don't want usser to sign in directly if twofactorenabled is false
-      if (existingUser.twofactorEnabled) {
+      if (existingUser.isTwoFactorEnabled) {
         const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
           existingUser.id
         );
