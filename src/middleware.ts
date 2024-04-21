@@ -16,7 +16,7 @@ export default auth((req) => {
   const { nextUrl } = req;
   const isLoggedIn = !!req.auth;
 
-  console.log("Route", req.nextUrl.pathname);
+  // console.log("Route", req.nextUrl.pathname);
 
   // console.log("ROUTE", req.nextUrl);
 
@@ -24,9 +24,9 @@ export default auth((req) => {
   const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
 
-  console.log("isApiAuthRoutes", isApiAuthRoutes);
-  console.log("isPublicRoutes", isPublicRoutes);
-  console.log("isAuthRoutes", isAuthRoutes);
+  // console.log("isApiAuthRoutes", isApiAuthRoutes);
+  // console.log("isPublicRoutes", isPublicRoutes);
+  // console.log("isAuthRoutes", isAuthRoutes);
 
   if (isApiAuthRoutes) {
     // console.log("isAuthRoutes", isAuthRoutes);
@@ -35,7 +35,7 @@ export default auth((req) => {
 
   if (isAuthRoutes) {
     if (isLoggedIn) {
-      console.log("isLoggedIn", isAuthRoutes);
+      // console.log("isLoggedIn", isAuthRoutes);
       return Response.redirect(new URL(DEFAULT_LOGIN_REDIRECT, nextUrl));
     } else {
       return;
@@ -43,7 +43,7 @@ export default auth((req) => {
   }
 
   if (!isLoggedIn && !isPublicRoutes) {
-    console.log("it is in PublicRoutes", isPublicRoutes);
+    // console.log("it is in PublicRoutes", isPublicRoutes);
     return Response.redirect(new URL("/auth/login", nextUrl));
   }
 

@@ -45,6 +45,9 @@ export const {
 
       // Allow OAUTH without email verification
       if (account?.provider !== "credentials") return true;
+      if (!user.id) {
+        return false;
+      }
 
       const existingUser = await getSingleUserById(user.id);
       // console.log("existingUser in signIn auth.ts", existingUser);
@@ -113,7 +116,7 @@ export const {
       token.email = existingUser.email;
       token.role = existingUser.role;
       token.isTwoFactorEnabled = existingUser.isTwoFactorEnabled;
-      console.log("token in jwt", token);
+      // console.log("token in jwt", token);
       // sub is user_id in database
       // the goal is to access sub from token and add fields if necessary
       return token;
