@@ -18,7 +18,7 @@ generator client {
 
 model Account {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  userId             String
+  userId             String  @db.ObjectId
   type               String
   provider           String
   providerAccountId  String
@@ -39,8 +39,52 @@ model Account {
 
 enum UserRole {
   ADMIN
-  USER
+  SCHOOLADMINISTRATOR
+  STUDENT
+  TEACHER
 }
+
+model School {
+   id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  location  String
+  teachers  Teacher[]
+  students  Student[]
+}
+
+model Teacher {
+   id    String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName   String
+  lastName    String
+  email       String    @unique
+  school      School    @relation(fields: [schoolId], references: [id])
+  schoolId    String  @db.ObjectId
+  classes     Class[]
+}
+
+model Student {
+   id    String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName   String
+  lastName    String
+  email       String    @unique
+  school      School    @relation(fields: [schoolId], references: [id])
+  schoolId    String  @db.ObjectId
+  // class       Class     @relation(fields: [classId], references: [id])
+  // classId     String
+}
+
+model Class {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  // className   String
+  // school      School    @relation(fields: [schoolId], references: [id])
+  // schoolId    String
+  teacherId   String? @db.ObjectId
+  teacher     Teacher?  @relation(fields: [teacherId], references: [id])
+  // students    Student[]
+}
+
+
+
 
 model User {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
@@ -49,8 +93,8 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
-  accounts      Account[]
-  role          UserRole@default(USER)
+  accounts      Account[] 
+  role          UserRole@default(STUDENT)
   // sessions      Session[] // we willn't use it as it is database session
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?

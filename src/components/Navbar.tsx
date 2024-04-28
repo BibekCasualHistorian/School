@@ -5,8 +5,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import RoundedCard from "../reusableCards/RoundedCard";
-import { useCurrentUser } from "../../../hooks/use-current-user";
+import RoundedCard from "./reusableCards/RoundedCard";
+import { useCurrentUser } from "../../hooks/use-current-user";
 
 const Navbar = () => {
   const user = useCurrentUser();
