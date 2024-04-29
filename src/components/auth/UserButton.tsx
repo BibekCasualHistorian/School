@@ -15,6 +15,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useCurrentUser } from "../../../hooks/use-current-user";
 import { FaUser } from "react-icons/fa";
 import LogoutButton from "./LogoutButton";
+import Link from "next/link";
 
 const UserButton = () => {
   const user = useCurrentUser();
@@ -28,7 +29,10 @@ const UserButton = () => {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className="w-52 text-center">
+        <DropdownMenuItem>
+          <Link href={"/school"}>School</Link>
+        </DropdownMenuItem>
         <LogoutButton>
           <DropdownMenuItem>Logout</DropdownMenuItem>
         </LogoutButton>

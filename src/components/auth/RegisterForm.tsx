@@ -21,6 +21,7 @@ import { FormError } from "../FormError";
 import { FormSuccess } from "../FormSuccess";
 import { RegisterSchema } from "../../../schemas";
 import { register } from "../../../actions/register";
+import { login } from "../../../actions/login";
 
 const RegisterForm = () => {
   const [success, setSuccess] = useState<string | undefined>("");
@@ -37,6 +38,7 @@ const RegisterForm = () => {
         console.log(data);
         setSuccess(data.message);
         setError(data.error);
+        // login()
       });
     });
   };

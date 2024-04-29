@@ -39,7 +39,7 @@ model Account {
 
 enum UserRole {
   ADMIN
-  SCHOOLADMINISTRATOR
+  SCHOOL
   STUDENT
   TEACHER
 }

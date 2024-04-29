@@ -7,7 +7,7 @@ interface RoundedCardProps {
 }
 
 const RoundedCard = ({ children, className, isHeader }: RoundedCardProps) => {
-  console.log(className);
+  // console.log(className);
   if (isHeader) {
     return <header className={`${className} rounded-lg`}>{children}</header>;
   }

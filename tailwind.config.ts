@@ -20,8 +20,10 @@ const config = {
     extend: {
       colors: {
         mainBackgroundColor: "#27272a",
-        primaryTextColor: "#ecedee",
-        secondaryTextColor: "#83838a",
+        secondaryBackgroundColor: "#18181b",
+        activeTextColor: "#e8e8e9",
+        primaryTextColor: "#ffffff",
+        secondaryTextColor: "#a0a0a9",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

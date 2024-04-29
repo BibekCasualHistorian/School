@@ -10,7 +10,7 @@ import { useCurrentUser } from "../../hooks/use-current-user";
 
 const Navbar = () => {
   const user = useCurrentUser();
-  console.log("user", user);
+  // console.log("user", user);
   const pathname = usePathname();
   return (
     <RoundedCard
