@@ -1,8 +1,7 @@
 import React from "react";
-import StudentNav from "../_components/StudentNav";
 
 const page = () => {
-  return <div className=""></div>;
+  return <div className="">real</div>;
 };
 
 export default page;

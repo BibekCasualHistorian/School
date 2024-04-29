@@ -17,7 +17,7 @@ interface SchoolLayoutsPorps {
 const route = "school";
 
 const navItems = [
-  { icon: <FaUser />, label: "Profile", href: `/${route}` },
+  { icon: <FaUser />, label: "Profile", href: `/${route}/profile` },
   { icon: <FaSchool />, label: "Students", href: `/${route}/students` },
   {
     icon: <FaChalkboardTeacher />,

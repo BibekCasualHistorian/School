@@ -10,17 +10,17 @@ interface EventsLayoutsPorps {
 const route = `/school/events`;
 
 const navOptions = [
-  { label: "View Student", href: `${route}` },
+  { label: "View Events", href: `${route}` },
   {
-    label: `Add Student`,
+    label: `Add Events`,
     href: `${route}/add-student`,
   },
   {
-    label: `Edit Student`,
+    label: `Edit Events`,
     href: `${route}/edit-student`,
   },
   {
-    label: `Send Email`,
+    label: `Send Events`,
     href: `${route}/send-email`,
   },
 ];

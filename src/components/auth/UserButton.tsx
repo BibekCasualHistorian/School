@@ -31,7 +31,7 @@ const UserButton = () => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-52 text-center">
         <DropdownMenuItem>
-          <Link href={"/school"}>School</Link>
+          <Link href={"/school/profile"}>School</Link>
         </DropdownMenuItem>
         <LogoutButton>
           <DropdownMenuItem>Logout</DropdownMenuItem>
