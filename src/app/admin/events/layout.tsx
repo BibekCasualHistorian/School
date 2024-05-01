@@ -3,33 +3,33 @@ import React from "react";
 import SideComponentHeader from "@/components/reusableCards/SideComponentHeader";
 import SideComponentNav from "@/components/reusableCards/SideComponentNav";
 
-interface NoticeLayoutsPorps {
+interface EventsLayoutsPorps {
   children: React.ReactNode;
 }
 
-const route = `/school/notices`;
+const route = `/admin/events`;
 
 const navOptions = [
-  { label: "View Student", href: `${route}` },
+  { label: "View Events", href: `${route}` },
   {
-    label: `Add Student`,
+    label: `Add Events`,
     href: `${route}/add-student`,
   },
   {
-    label: `Edit Student`,
+    label: `Edit Events`,
     href: `${route}/edit-student`,
   },
   {
-    label: `Send Email`,
+    label: `Send Events`,
     href: `${route}/send-email`,
   },
 ];
 
-const NoticeLayouts = ({ children }: NoticeLayoutsPorps) => {
+const EventsLayouts = ({ children }: EventsLayoutsPorps) => {
   return (
     <div className="p-4">
       <SideComponentHeader
-        header="Stay Informed, Stay Ahead"
+        header="Unleash the Excitement"
         description="Stay updated with important notices and announcements. Be the first to know about what's happening around you"
       />
       <SideComponentNav navOptions={navOptions} />
@@ -38,4 +38,4 @@ const NoticeLayouts = ({ children }: NoticeLayoutsPorps) => {
   );
 };
 
-export default NoticeLayouts;
+export default EventsLayouts;

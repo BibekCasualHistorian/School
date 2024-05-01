@@ -3,27 +3,27 @@ import React from "react";
 import SideComponentHeader from "@/components/reusableCards/SideComponentHeader";
 import SideComponentNav from "@/components/reusableCards/SideComponentNav";
 
-interface StudentsLayoutsPorps {
+interface StudentsLayoutsProps {
   children: React.ReactNode;
 }
 
 const navOptions = [
-  { label: "View Student", href: "/school/students" },
+  { label: "View Student", href: "/admin/students" },
   {
     label: "Add Student",
-    href: "/school/students/add-student",
+    href: "/admin/students/add-student",
   },
   {
     label: "Edit Student",
-    href: "/school/students/edit-student",
+    href: "/admin/students/edit-student",
   },
   {
     label: "Send Email",
-    href: "/school/students/send-email",
+    href: "/admin/students/send-email",
   },
 ];
 
-const StudentsLayouts = ({ children }: { children: React.ReactNode }) => {
+const StudentsLayouts = ({ children }: StudentsLayoutsProps) => {
   return (
     <div className="p-4">
       <SideComponentHeader

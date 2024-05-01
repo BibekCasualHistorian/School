@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import React from "react";
 import RoundedCard from "@/components/reusableCards/RoundedCard";
 import SideNav from "../../components/reusableCards/SideNav";
@@ -14,16 +13,18 @@ interface SchoolLayoutsPorps {
   children: React.ReactNode;
 }
 
-const route = "school";
+const route = "admin";
 
 const navItems = [
   { icon: <FaUser />, label: "Profile", href: `/${route}/profile` },
-  { icon: <FaSchool />, label: "Students", href: `/${route}/students` },
+  { icon: <FaUser />, label: "Classes", href: `/${route}/classes` },
+  { icon: <FaUser />, label: "Groups", href: `/${route}/groups` },
   {
     icon: <FaChalkboardTeacher />,
     label: "Teachers",
     href: `/${route}/teachers`,
   },
+  { icon: <FaSchool />, label: "Students", href: `/${route}/students` },
   { icon: <FaCalendarAlt />, label: "Events", href: `/${route}/events` },
   { icon: <FaBell />, label: "Notices", href: `/${route}/notices` },
 ];

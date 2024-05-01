@@ -27,9 +27,7 @@ const SideNav = ({ navItems }: { navItems: any }) => {
           <span className="text-nowrap text-base font-semibold">
             {user?.name}
           </span>
-          <span className="text-sm text-secondaryTextColor">
-            {user?.role.toLowerCase()}
-          </span>
+          <span className="text-sm text-secondaryTextColor">{user?.role}</span>
         </div>
       </div>
       {navItems.map((item: any, index: number) => (
@@ -37,7 +35,7 @@ const SideNav = ({ navItems }: { navItems: any }) => {
           href={item.href}
           key={index}
           className={`px-4 py-2.5 flex mb-1  text-xl items-center gap-2 cursor-pointer w-full hover:bg-white hover:text-black   rounded-lg ${
-            pathname == item.href
+            pathname.includes(item.href)
               ? "bg-white text-black"
               : "text-secondaryTextColor"
           }`}

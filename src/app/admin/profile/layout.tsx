@@ -7,7 +7,7 @@ interface ProfileLayoutsPorps {
   children: React.ReactNode;
 }
 
-const route = `/school/profile`;
+const route = `/admin/profile`;
 
 const navOptions = [
   { label: "View Student", href: `${route}` },

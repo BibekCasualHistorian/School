@@ -29,12 +29,16 @@ const UserButton = () => {
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-52 text-center">
-        <DropdownMenuItem>
-          <Link href={"/school/profile"}>School</Link>
+      <DropdownMenuContent className="w-52 text-center flex flex-col justify-center">
+        <DropdownMenuItem className="">
+          <Link href={"/admin/profile"} className=" w-full p-3 rounded-lg">
+            Admin
+          </Link>
         </DropdownMenuItem>
         <LogoutButton>
-          <DropdownMenuItem>Logout</DropdownMenuItem>
+          <DropdownMenuItem className="p-3 text-center w-full  flex justify-center">
+            Logout
+          </DropdownMenuItem>
         </LogoutButton>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,31 +1,30 @@
-import Navbar from "@/components/Navbar";
 import React from "react";
 import SideComponentHeader from "@/components/reusableCards/SideComponentHeader";
 import SideComponentNav from "@/components/reusableCards/SideComponentNav";
 
-interface EventsLayoutsPorps {
+interface TeachersLayoutsPorps {
   children: React.ReactNode;
 }
 
-const route = `/school/events`;
+const route = `/admin/teachers`;
 
 const navOptions = [
-  { label: "View Events", href: `${route}` },
+  { label: "View Teacher", href: `${route}` },
   {
-    label: `Add Events`,
-    href: `${route}/add-student`,
+    label: `Add Teacher`,
+    href: `${route}/add-teacher`,
   },
   {
-    label: `Edit Events`,
-    href: `${route}/edit-student`,
+    label: `Edit Teacher`,
+    href: `${route}/edit-teacher`,
   },
   {
-    label: `Send Events`,
+    label: `Send Email`,
     href: `${route}/send-email`,
   },
 ];
 
-const EventsLayouts = ({ children }: EventsLayoutsPorps) => {
+const TeachersLayouts = ({ children }: TeachersLayoutsPorps) => {
   return (
     <div className="p-4">
       <SideComponentHeader
@@ -38,4 +37,4 @@ const EventsLayouts = ({ children }: EventsLayoutsPorps) => {
   );
 };
 
-export default EventsLayouts;
+export default TeachersLayouts;

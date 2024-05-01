@@ -39,17 +39,15 @@ model Account {
 
 enum UserRole {
   ADMIN
-  SCHOOL
-  STUDENT
   TEACHER
+  STUDENT
 }
 
 model School {
    id    String @id @default(auto()) @map("_id") @db.ObjectId
   name      String
-  location  String
-  teachers  Teacher[]
-  students  Student[]
+  // teachers  Teacher[]
+  // students  Student[]
 }
 
 model Teacher {
@@ -57,9 +55,12 @@ model Teacher {
   firstName   String
   lastName    String
   email       String    @unique
-  school      School    @relation(fields: [schoolId], references: [id])
-  schoolId    String  @db.ObjectId
-  classes     Class[]
+
+    adminId String? @db.ObjectId
+  user User? @relation(fields: [adminId],references: [id])
+  // school      School    @relation(fields: [schoolId], references: [id])
+  // schoolId    String  @db.ObjectId
+  groups     Group[]
 }
 
 model Student {
@@ -67,24 +68,46 @@ model Student {
   firstName   String
   lastName    String
   email       String    @unique
-  school      School    @relation(fields: [schoolId], references: [id])
-  schoolId    String  @db.ObjectId
+
+  classId String? @db.ObjectId
+  class Class? @relation(fields: [classId], references: [id])
+
+     adminId String? @db.ObjectId
+  user User? @relation(fields: [adminId],references: [id])
+  // schoolId    String  @db.ObjectId
+  // school      School    @relation(fields: [schoolId], references: [id])
   // class       Class     @relation(fields: [classId], references: [id])
   // classId     String
 }
 
 model Class {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  // className   String
+  name  String
+
+  adminId String? @db.ObjectId
+  user User? @relation(fields: [adminId],references: [id])
+
+  student Student[]
+  groups Group[]
+}
+
+model Group {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  
+  classId String? @db.ObjectId
+  class Class? @relation(fields: [classId], references: [id])
   // school      School    @relation(fields: [schoolId], references: [id])
   // schoolId    String
   teacherId   String? @db.ObjectId
   teacher     Teacher?  @relation(fields: [teacherId], references: [id])
+
+  
+  adminId String? @db.ObjectId
+  user User? @relation(fields: [adminId],references: [id])
+
   // students    Student[]
 }
-
-
-
 
 model User {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
@@ -94,7 +117,11 @@ model User {
   image         String?
   password      String?
   accounts      Account[] 
+  group Group[]
+  teacher Teacher[]
+  student Student[]
   role          UserRole@default(STUDENT)
+  class Class[]
   // sessions      Session[] // we willn't use it as it is database session
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?

@@ -3,21 +3,21 @@ import React from "react";
 import SideComponentHeader from "@/components/reusableCards/SideComponentHeader";
 import SideComponentNav from "@/components/reusableCards/SideComponentNav";
 
-interface TeachersLayoutsPorps {
+interface NoticeLayoutsPorps {
   children: React.ReactNode;
 }
 
-const route = `/school/teachers`;
+const route = `/admin/groups`;
 
 const navOptions = [
-  { label: "View Student", href: `${route}` },
+  { label: "View Groups", href: `${route}` },
   {
-    label: `Add Student`,
-    href: `${route}/add-student`,
+    label: `Add Groups`,
+    href: `${route}/add-group`,
   },
   {
-    label: `Edit Student`,
-    href: `${route}/edit-student`,
+    label: `Edit Groups`,
+    href: `${route}/edit-group`,
   },
   {
     label: `Send Email`,
@@ -25,12 +25,12 @@ const navOptions = [
   },
 ];
 
-const TeachersLayouts = ({ children }: TeachersLayoutsPorps) => {
+const NoticeLayouts = ({ children }: NoticeLayoutsPorps) => {
   return (
     <div className="p-4">
       <SideComponentHeader
-        header="Unleash the Excitement"
-        description="Stay updated with important notices and announcements. Be the first to know about what's happening around you"
+        header="Groups"
+        description="Add, update or delete groups"
       />
       <SideComponentNav navOptions={navOptions} />
       {children}
@@ -38,4 +38,4 @@ const TeachersLayouts = ({ children }: TeachersLayoutsPorps) => {
   );
 };
 
-export default TeachersLayouts;
+export default NoticeLayouts;
