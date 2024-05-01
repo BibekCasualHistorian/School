@@ -22,6 +22,7 @@ const AddGroups = ({ userId, classes }: { userId: any; classes: any[] }) => {
   const [error, setError] = useState<string | undefined>(undefined);
   const handleSubmit = async (e: any) => {
     e.preventDefault();
+
     const url = "http://localhost:3000/api/admin/groups/create";
     let newUrl = new URL(url);
     newUrl.searchParams.append("adminId", userId);
@@ -49,7 +50,7 @@ const AddGroups = ({ userId, classes }: { userId: any; classes: any[] }) => {
   };
   return (
     <form className="flex gap-2.5 mt-4 text-black" onSubmit={handleSubmit}>
-      {/* <Select>
+      <Select onValueChange={(value) => setSelectedClass(value)}>
         <SelectTrigger>
           <SelectValue placeholder="Select the class" className="text-black" />
         </SelectTrigger>
@@ -66,8 +67,8 @@ const AddGroups = ({ userId, classes }: { userId: any; classes: any[] }) => {
             );
           })}
         </SelectContent>
-      </Select> */}
-      <select
+      </Select>
+      {/* <select
         onChange={(e) => setSelectedClass(e.target.value)}
         className="rounded-xl flex-1 "
       >
@@ -77,7 +78,7 @@ const AddGroups = ({ userId, classes }: { userId: any; classes: any[] }) => {
             {each.name}
           </option>
         ))}
-      </select>
+      </select> */}
       <Input
         placeholder="Type the group name"
         value={name}
