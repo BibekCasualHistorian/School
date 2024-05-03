@@ -9,25 +9,9 @@ interface ProfileLayoutsPorps {
 
 const route = `/admin/profile`;
 
-const navOptions = [
-  { label: "View Student", href: `${route}` },
-  {
-    label: `Add Student`,
-    href: `${route}/add-student`,
-  },
-  {
-    label: `Edit Student`,
-    href: `${route}/edit-student`,
-  },
-  {
-    label: `Send Email`,
-    href: `${route}/send-email`,
-  },
-];
-
 const profileLinks = [
-  { label: "Home", href: "/school/profile" },
-  { label: "Appearance", href: "/school/profile/appearance" },
+  { label: "Home", href: `${route}` },
+  { label: "Appearance", href: `${route}/appearance` },
 ];
 
 const ProfileLayouts = ({ children }: ProfileLayoutsPorps) => {

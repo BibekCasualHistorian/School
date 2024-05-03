@@ -19,7 +19,7 @@ const SideComponentNav = ({ navOptions }: { navOptions: any }) => {
         <Link
           href={option.href}
           key={index}
-          className={`flex items-center text-base px-5  justify-start text-secondaryTextColor py-1.5 rounded-lg transition duration-300 hover:bg-secondaryBackgroundColor ${
+          className={`flex items-center text-base px-7  justify-start text-secondaryTextColor py-1.5 rounded-lg transition duration-300 hover:bg-secondaryBackgroundColor ${
             pathName == option.href
               ? "bg-secondaryBackgroundColor text-white"
               : ""
