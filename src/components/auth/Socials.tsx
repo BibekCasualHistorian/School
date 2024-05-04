@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "../ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -8,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { DEFAULT_LOGIN_REDIRECT } from "../../../routes";
 
 const Socials = () => {
+  const [error, setError] = useState("");
   const handleProviders = (provider: "google" | "github") => {
     signIn(provider, { callbackUrl: DEFAULT_LOGIN_REDIRECT });
   };

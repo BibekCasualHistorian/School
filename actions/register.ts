@@ -23,10 +23,11 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
   const { email, password, name } = validatedFields.data;
   console.log(email, password, name);
-  if (
-    (await checkWhetherStudentIsAddedInDatabaseByAdmin(email)) ||
-    (await checkWhetherTeacherIsAddedInDatabaseByAdmin(email))
-  ) {
+  const isAddedByAdmin =
+    (await !checkWhetherStudentIsAddedInDatabaseByAdmin(email)) ||
+    (await !checkWhetherTeacherIsAddedInDatabaseByAdmin(email));
+  console.log("isAddedByAdmin", isAddedByAdmin);
+  if (!isAddedByAdmin) {
     return { success: false, error: "Sorry, You need to contact to Admin" };
   }
 

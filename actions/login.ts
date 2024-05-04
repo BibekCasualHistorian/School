@@ -4,7 +4,11 @@ import * as z from "zod";
 
 import { loginSchema } from "../schemas";
 import { signIn } from "../auth";
-import { DEFAULT_LOGIN_REDIRECT } from "../routes";
+import {
+  DEFAULT_LOGIN_REDIRECT_FOR_ADMIN,
+  DEFAULT_LOGIN_REDIRECT_FOR_STUDENT,
+  DEFAULT_LOGIN_REDIRECT_FOR_TEACHER,
+} from "../routes";
 import { AuthError } from "next-auth";
 import { getSingleUserByEmail } from "../lib/utilsSearch";
 import {
@@ -86,11 +90,20 @@ export const login = async (values: z.infer<typeof loginSchema>) => {
     }
   }
 
+  let redirectTo;
+  const role = existingUser.role;
+  if (role == "ADMIN") {
+    redirectTo = DEFAULT_LOGIN_REDIRECT_FOR_ADMIN;
+  } else if (role == "TEACHER") {
+    redirectTo = DEFAULT_LOGIN_REDIRECT_FOR_TEACHER;
+  } else if (role == "STUDENT") {
+    redirectTo = DEFAULT_LOGIN_REDIRECT_FOR_STUDENT;
+  }
   try {
     await signIn("credentials", {
       email,
       password,
-      redirectTo: DEFAULT_LOGIN_REDIRECT,
+      redirectTo: redirectTo,
     });
   } catch (error) {
     if (error instanceof AuthError) {

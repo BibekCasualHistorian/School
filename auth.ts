@@ -2,7 +2,11 @@ import NextAuth from "next-auth";
 import authConfig from "./auth.config";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "./lib/db";
-import { getSingleUserById } from "./lib/utilsSearch";
+import {
+  checkWhetherStudentIsAddedInDatabaseByAdmin,
+  checkWhetherTeacherIsAddedInDatabaseByAdmin,
+  getSingleUserById,
+} from "./lib/utilsSearch";
 import { UserRole } from "@prisma/client";
 import { getTwoFactorConfirmationByUserId } from "./data/two-factor-confirmation";
 import { getAccountById } from "./data/account";
@@ -17,15 +21,15 @@ export const {
     signIn: "/auth/login", // will redirect to this route when something goes wrong
     error: "/auth/error", // will redirect to if we have error
   },
-  events: {
-    async linkAccount({ user }) {
-      await db.user.update({
-        where: { id: user.id },
-        data: { emailVerified: new Date() },
-      });
-      // to know if user used OAUTH or not
-    },
-  },
+  // events: {
+  //   async linkAccount({ user }) {
+  //     await db.user.update({
+  //       where: { id: user.id },
+  //       data: { emailVerified: new Date() },
+  //     });
+  //     // to know if user used OAUTH or not
+  //   },
+  // },
   callbacks: {
     // async signIn({ user }) {
     //   const existingUser = await getSingleUserById(user.id);
@@ -44,6 +48,9 @@ export const {
       // email sent
 
       // Allow OAUTH without email verification
+
+      console.log("user in signIn", user, account);
+
       if (account?.provider !== "credentials") return true;
       if (!user.id) {
         return false;

@@ -30,9 +30,14 @@ export const checkWhetherStudentIsAddedInDatabaseByAdmin = async (
 ) => {
   try {
     const student = await db.student.findUnique({ where: { email: email } });
-    return student;
+    console.log("student", student);
+    if (student) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
-    return null;
+    return false;
   }
 };
 
@@ -41,7 +46,12 @@ export const checkWhetherTeacherIsAddedInDatabaseByAdmin = async (
 ) => {
   try {
     const teacher = await db.teacher.findUnique({ where: { email: email } });
-    return teacher;
+    console.log("teacher", teacher);
+    if (teacher) {
+      return true;
+    } else {
+      return false;
+    }
   } catch (error) {
     return null;
   }

@@ -12,10 +12,13 @@ const Navbar = () => {
   const user = useCurrentUser();
   // console.log("user", user);
   const pathname = usePathname();
+  console.log("pathname", pathname);
   return (
     <RoundedCard
       isHeader
-      className="flex rounded-xl items-center justify-between bg-mainBackgroundColor p-3 px-5 text-black"
+      className={`rounded-xl items-center justify-between bg-mainBackgroundColor p-3 px-5 text-black ${
+        pathname.includes("auth") ? "hidden" : "flex"
+      }`}
     >
       <Link href={"/"} className="text-red-500 text-2xl font-semibold">
         School

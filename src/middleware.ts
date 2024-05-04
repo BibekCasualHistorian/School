@@ -5,9 +5,10 @@ import NextAuth from "next-auth";
 import authConfig from "../auth.config";
 import {
   publicRoutes,
-  DEFAULT_LOGIN_REDIRECT,
+  // DEFAULT_LOGIN_REDIRECT,
   authRoutes,
   apiAuthPrefix,
+  DEFAULT_LOGIN_REDIRECT,
 } from "../routes";
 
 const { auth } = NextAuth(authConfig);
@@ -23,6 +24,12 @@ export default auth((req) => {
   const isApiAuthRoutes = nextUrl.pathname.startsWith(apiAuthPrefix);
   const isPublicRoutes = publicRoutes.includes(nextUrl.pathname);
   const isAuthRoutes = authRoutes.includes(nextUrl.pathname);
+
+  const isInStudentRoute = nextUrl.pathname.includes("student");
+  const isInTeacherRoute = nextUrl.pathname.includes("teacher");
+  const isInAdminRoute = nextUrl.pathname.includes("admin");
+
+  console.log(isInAdminRoute, isInStudentRoute, isInTeacherRoute);
 
   // console.log("isApiAuthRoutes", isApiAuthRoutes);
   // console.log("isPublicRoutes", isPublicRoutes);

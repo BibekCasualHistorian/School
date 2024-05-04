@@ -20,4 +20,7 @@ export const teacherRoute = "teacher";
 export const apiAuthPrefix = "/api/auth";
 
 // the default redirect path after loggin
-export const DEFAULT_LOGIN_REDIRECT = "/admin/profile";
+export const DEFAULT_LOGIN_REDIRECT = "/";
+export const DEFAULT_LOGIN_REDIRECT_FOR_ADMIN = "/admin/profile";
+export const DEFAULT_LOGIN_REDIRECT_FOR_TEACHER = "/teacher/profile";
+export const DEFAULT_LOGIN_REDIRECT_FOR_STUDENT = "/student/profile";
