@@ -7,21 +7,17 @@ import { currentUser } from "../../../../../lib/auth";
 import { db } from "../../../../../lib/db";
 
 const Page = async () => {
-  //   console.log("user", user);
   const user = await currentUser();
 
   const classes = await db.class.findMany({});
 
   const groups = await db.group.findMany({});
 
-  // const groups: any = [];
-  // const classes: any = [];
+  // console.log("classes", classes);
 
-  console.log("classes", classes);
+  // console.log("groups", groups);
 
-  console.log("groups", groups);
-
-  return <AddTeacher userId={user?.id} classes={classes} groups={groups} />;
+  return <AddTeacher userId={user?.id} groups={groups} />;
 };
 
 export default Page;

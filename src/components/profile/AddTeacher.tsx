@@ -4,16 +4,17 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import Select from "react-select";
 import RoundedCard from "../reusableCards/RoundedCard";
+import { useRouter } from "next/navigation";
 
 const AddTeacher = ({
   userId,
-  classes,
   groups,
 }: {
   userId: any;
-  classes: any[];
+  classes?: any[];
   groups: any[];
 }) => {
+  const router = useRouter();
   const option = groups.map((each, index) => {
     return {
       value: each.id,
@@ -25,7 +26,6 @@ const AddTeacher = ({
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | undefined>(undefined);
   const [selectedGroup, setSelectedGroup] = useState<string[] | undefined>([]);
-  console.log("selected group", selectedGroup);
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -37,10 +37,16 @@ const AddTeacher = ({
     const baseUrl = "http://localhost:3000/api/admin/teachers/create";
     const url = new URL(baseUrl);
     url.searchParams.append("adminId", userId);
+    console.log("url", url.href);
     try {
       const response = await fetch(url.href, {
         method: "POST",
-        body: JSON.stringify({ firstName, lastName, email, selectedGroup }),
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          selectedGroupsToBeSent,
+        }),
       });
       const data = await response.json();
       console.log("response, data", response, data);
@@ -58,14 +64,12 @@ const AddTeacher = ({
     }
   };
   const handleSelectChange = (value: any) => {
-    console.log(value);
     setSelectedGroup(value);
   };
 
   return (
     <form className="grid gap-2.5 mt-4" onSubmit={handleSubmit}>
       <Select
-        // defaultValue={selectedGroup}
         options={option}
         className="min-w-[220px] text-black"
         isMulti

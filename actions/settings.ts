@@ -32,12 +32,14 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
   }
 
   if (values.email && values.email !== user.email) {
-    const existingUser = await getSingleUserByEmail(values.email);
+    const existingUser = await getSingleUserByEmail(values.email as string);
     if (existingUser && existingUser.id !== user.id) {
       return { error: "Email already in use" };
     }
 
-    const verificationToken = await generateVerificationToken(values.email);
+    const verificationToken = await generateVerificationToken(
+      values.email as string
+    );
     await sendVerificationEmail(
       verificationToken.email,
       verificationToken.token
@@ -46,24 +48,24 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
 
   if (values.password && values.newPassword && dbUser.password) {
     const passwordMatch = await bcrypt.compare(
-      values.password,
+      values.password as string,
       dbUser.password
     );
     if (!passwordMatch) {
       return { success: false, message: "Incorrect Password" };
     }
 
-    const hashedPassword = await bcrypt.hash(values.newPassword, 10);
+    const hashedPassword = await bcrypt.hash(values.newPassword as string, 10);
     values.password = hashedPassword;
     values.newPassword = undefined;
   }
 
-  await db.user.update({
-    where: { id: dbUser.id },
-    data: {
-      ...values,
-    },
-  });
+  // await db.user.update({
+  //   where: { id: dbUser.id },
+  //   data: {
+  //     ...values,
+  //   },
+  // });
 
   return { success: true, message: "Settings Updated" };
 };

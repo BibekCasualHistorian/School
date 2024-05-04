@@ -50,19 +50,6 @@ model School {
   // teachers  Teacher[]
   // students  Student[]
 }
-
-model Teacher {
-   id    String @id @default(auto()) @map("_id") @db.ObjectId
-  firstName   String
-  lastName    String
-  email       String    @unique
-
-    adminId String? @db.ObjectId
-  user User? @relation(fields: [adminId],references: [id])
-
-  groups     Group[]
-}
-
 model Student {
    id    String @id @default(auto()) @map("_id") @db.ObjectId
   firstName   String
@@ -91,6 +78,21 @@ model Class {
   groups Group[]
 }
 
+model Teacher {
+   id    String @id @default(auto()) @map("_id") @db.ObjectId
+  firstName   String
+  lastName    String
+  email       String    @unique
+
+    adminId String? @db.ObjectId
+  user User? @relation(fields: [adminId],references: [id])
+
+  groups     Group[]
+  groupLinks GroupTeacher[]
+}
+
+
+
 model Group {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name String
@@ -104,6 +106,17 @@ model Group {
   adminId String? @db.ObjectId
   user User? @relation(fields: [adminId],references: [id])
 
+  teacherLinks GroupTeacher[]
+}
+
+model GroupTeacher {
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  groupId   String @db.ObjectId
+  teacherId  String @db.ObjectId
+
+  // Define relationships to Course and Teacher
+  course     Group  @relation(fields: [groupId], references: [id])
+  teacher    Teacher @relation(fields: [teacherId], references: [id])
 }
 
 model User {
