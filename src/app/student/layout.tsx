@@ -13,7 +13,7 @@ interface SchoolLayoutsPorps {
   children: React.ReactNode;
 }
 
-const route = "teacher";
+const route = "student";
 
 const navItems = [
   { icon: <FaUser />, label: "Profile", href: `/${route}/profile` },

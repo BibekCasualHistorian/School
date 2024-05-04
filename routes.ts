@@ -10,6 +10,10 @@ export const authRoutes = [
   "/auth/new-password",
 ];
 
+export const adminRoute = "admin";
+export const studentRoute = "student";
+export const teacherRoute = "teacher";
+
 // the prefix for API authentication routes
 // used of API authentication process
 // should always be available

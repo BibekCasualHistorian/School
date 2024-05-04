@@ -19,29 +19,53 @@ import Link from "next/link";
 
 const UserButton = () => {
   const user = useCurrentUser();
+  // console.log("user in UserButton", user);
   return (
-    <DropdownMenu modal={false}>
-      <DropdownMenuTrigger>
-        <Avatar>
-          <AvatarImage src={user?.image || ""} />
-          <AvatarFallback className="bg-sky-500">
-            <FaUser />
-          </AvatarFallback>
-        </Avatar>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-52 text-center flex flex-col justify-center">
-        <DropdownMenuItem className="">
-          <Link href={"/admin/profile"} className=" w-full p-3 rounded-lg">
-            Admin
-          </Link>
-        </DropdownMenuItem>
-        <LogoutButton>
-          <DropdownMenuItem className="p-3 text-center w-full  flex justify-center">
-            Logout
+    <div className="">
+      <DropdownMenu modal={false}>
+        <DropdownMenuTrigger>
+          <Avatar>
+            <AvatarImage src={user?.image || ""} />
+            <AvatarFallback className="bg-sky-500">
+              <FaUser />
+            </AvatarFallback>
+          </Avatar>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent
+          alignOffset={2}
+          className="w-52 text-center flex flex-col justify-center"
+        >
+          <DropdownMenuItem className="">
+            {user?.role == "ADMIN" && (
+              <Link href={"/admin/profile"} className=" w-full p-3 rounded-lg">
+                Admin
+              </Link>
+            )}
+            {user?.role == "STUDENT" && (
+              <Link
+                href={"/student/profile"}
+                className=" w-full p-3 rounded-lg"
+              >
+                Student
+              </Link>
+            )}
+            {user?.role == "TEACHER" && (
+              <Link
+                href={"/teacher/profile"}
+                className=" w-full p-3 rounded-lg"
+              >
+                Teacher
+              </Link>
+            )}
           </DropdownMenuItem>
-        </LogoutButton>
-      </DropdownMenuContent>
-    </DropdownMenu>
+          <LogoutButton>
+            <DropdownMenuItem className="p-3 text-center w-full  flex justify-center">
+              Logout
+            </DropdownMenuItem>
+          </LogoutButton>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </div>
   );
 };
 

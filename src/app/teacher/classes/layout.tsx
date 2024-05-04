@@ -7,7 +7,7 @@ interface NoticeLayoutsPorps {
   children: React.ReactNode;
 }
 
-const route = `/admin/classes`;
+const route = `/teacher/classes`;
 
 const navOptions = [
   { label: "View Class", href: `${route}` },
