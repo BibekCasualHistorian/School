@@ -4,9 +4,11 @@ import Link from "next/link";
 import React from "react";
 import { FaHamburger, FaUser } from "react-icons/fa";
 import { Input } from "../ui/input";
+import { useParams } from "next/navigation";
 
 const AllInbox = ({ users }: { users: any }) => {
-  const chats = ["/chat/1", "/chat/2", "/chat/3", "/", "/", "/", "/"]; // Example chat URLs
+  const params = useParams();
+  console.log("params", params); // Example chat URLs
 
   return (
     <div className="border-r-2 h-full  border-gray-300 p-2.5 ">
@@ -14,7 +16,7 @@ const AllInbox = ({ users }: { users: any }) => {
         <div className="font-bold flex items-center gap-3 text-2xl">
           <h1>Chats</h1>
           <p className="bg-mainBackgroundColor  w-7 h-7 flex items-center justify-center text-sm font-semibold rounded-full">
-            {chats.length}
+            {"9"}
           </p>
         </div>
 
@@ -52,8 +54,10 @@ const AllInbox = ({ users }: { users: any }) => {
         {users.map((each: any, index: number) => (
           <Link
             key={index}
-            href={"/"}
-            className="mr-4  w-full flex items-center gap-3 p-4 rounded-xl  hover:bg-secondaryBackgroundColor"
+            href={`/admin/inboxes/${each.id}/${"real"}`}
+            className={`mr-4  w-full flex items-center gap-3 p-4 rounded-xl  hover:bg-secondaryBackgroundColor ${
+              params.userId == each.id ? "bg-secondaryBackgroundColor" : ""
+            }`}
           >
             <div className="min-w-10  relative">
               <Image
