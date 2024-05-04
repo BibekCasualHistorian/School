@@ -5,11 +5,11 @@ import React from "react";
 import { FaHamburger, FaUser } from "react-icons/fa";
 import { Input } from "../ui/input";
 
-const AllInbox = ({ user }: { user: any }) => {
+const AllInbox = ({ users }: { users: any }) => {
   const chats = ["/chat/1", "/chat/2", "/chat/3", "/", "/", "/", "/"]; // Example chat URLs
 
   return (
-    <div className="border-r-2  border-gray-300 p-2.5 ">
+    <div className="border-r-2 h-full  border-gray-300 p-2.5 ">
       <div className="flex justify-between items-center px-3 rounded-lg  p-3">
         <div className="font-bold flex items-center gap-3 text-2xl">
           <h1>Chats</h1>
@@ -49,15 +49,15 @@ const AllInbox = ({ user }: { user: any }) => {
       </div>
 
       <div className="space-y-2 mt-2">
-        {chats.map((chatUrl: string, index: number) => (
+        {users.map((each: any, index: number) => (
           <Link
             key={index}
-            href={chatUrl}
+            href={"/"}
             className="mr-4  w-full flex items-center gap-3 p-4 rounded-xl  hover:bg-secondaryBackgroundColor"
           >
             <div className="min-w-10  relative">
               <Image
-                src={user.image}
+                src={each.image}
                 alt="User Image"
                 width={40}
                 height={40}
@@ -71,7 +71,7 @@ const AllInbox = ({ user }: { user: any }) => {
               </span>
             </div>
             <div className=" col-span-2 flex-1 overflow-hidden">
-              <h1 className="font-semibold">Taylor Smith</h1>
+              <h1 className="font-semibold">{each.name}</h1>
               <p
                 style={{ textOverflow: "ellipsis" }}
                 className="text-sm  text-backgroundTextColor overflow-hidden  text-nowrap"

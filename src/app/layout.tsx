@@ -5,6 +5,7 @@ import { db } from "../../lib/db";
 import { auth } from "../../auth";
 import { SessionProvider } from "next-auth/react";
 import Navbar from "@/components/Navbar";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,6 +29,7 @@ export default async function RootLayout({
           <main className="">
             <Navbar />
             {children}
+            <Toaster />
           </main>
         </body>
       </html>

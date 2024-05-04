@@ -1,6 +1,7 @@
 import React from "react";
 import { db } from "../../../../lib/db";
 import RoundedCard from "@/components/reusableCards/RoundedCard";
+
 export const revalidate = 0;
 
 const page = async () => {

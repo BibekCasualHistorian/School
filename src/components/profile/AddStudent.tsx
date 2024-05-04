@@ -9,8 +9,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import { useToast } from "../ui/use-toast";
 
 const AddStudent = ({ userId, classes }: { userId: any; classes: any[] }) => {
+  const { toast } = useToast();
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -23,11 +25,14 @@ const AddStudent = ({ userId, classes }: { userId: any; classes: any[] }) => {
     const baseUrl = "http://localhost:3000/api/admin/students/create";
     const url = new URL(baseUrl);
     url.searchParams.append("adminId", userId);
-    if (selectedClass) {
-      url.searchParams.append("classId", selectedClass);
-    }
     console.log(url.href);
     try {
+      if (!selectedClass) {
+        throw Error("No selected Class");
+      }
+      if (selectedClass) {
+        url.searchParams.append("classId", selectedClass);
+      }
       const response = await fetch(url.href, {
         method: "POST",
         body: JSON.stringify({ firstName, lastName, email }),
@@ -45,6 +50,7 @@ const AddStudent = ({ userId, classes }: { userId: any; classes: any[] }) => {
       }
     } catch (error: any) {
       setError(error.message || "An error occurred");
+      toast({ title: "Error", description: error.message });
     }
   };
   return (
