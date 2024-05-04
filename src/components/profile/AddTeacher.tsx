@@ -2,27 +2,50 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import Select from "react-select";
+import RoundedCard from "../reusableCards/RoundedCard";
 
-const AddTeacher = ({ userId }: { userId: any }) => {
+const AddTeacher = ({
+  userId,
+  classes,
+  groups,
+}: {
+  userId: any;
+  classes: any[];
+  groups: any[];
+}) => {
+  const option = groups.map((each, index) => {
+    return {
+      value: each.id,
+      label: each.name,
+    };
+  });
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string | undefined>(undefined);
+  const [selectedGroup, setSelectedGroup] = useState<string[] | undefined>([]);
+  console.log("selected group", selectedGroup);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(firstName, lastName, email);
-    console.log("userId", userId);
+    const selectedGroupsToBeSent = selectedGroup?.map((each: any) => {
+      return each.value;
+    });
+    console.log("selectedGroupsToBeSent", selectedGroupsToBeSent);
     const baseUrl = "http://localhost:3000/api/admin/teachers/create";
     const url = new URL(baseUrl);
     url.searchParams.append("adminId", userId);
     try {
       const response = await fetch(url.href, {
         method: "POST",
-        body: JSON.stringify({ firstName, lastName, email }),
+        body: JSON.stringify({ firstName, lastName, email, selectedGroup }),
       });
       const data = await response.json();
       console.log("response, data", response, data);
       if (response.ok) {
+        setSelectedGroup([]);
         setEmail("");
         setFirstName("");
         setLastName("");
@@ -34,8 +57,23 @@ const AddTeacher = ({ userId }: { userId: any }) => {
       setError(error.message || "An error occurred");
     }
   };
+  const handleSelectChange = (value: any) => {
+    console.log(value);
+    setSelectedGroup(value);
+  };
+
   return (
-    <form className="flex gap-2.5 mt-4" onSubmit={handleSubmit}>
+    <form className="grid gap-2.5 mt-4" onSubmit={handleSubmit}>
+      <Select
+        // defaultValue={selectedGroup}
+        options={option}
+        className="min-w-[220px] text-black"
+        isMulti
+        name="groups"
+        placeholder="Select for groups..."
+        classNamePrefix="select"
+        onChange={(value) => handleSelectChange(value)}
+      />
       <Input
         placeholder="Type the firstName name"
         value={firstName}

@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 
 const AddGroups = ({ userId, classes }: { userId: any; classes: any[] }) => {
   // console.log("userId in Add Groups", userId, classes);
@@ -52,7 +51,7 @@ const AddGroups = ({ userId, classes }: { userId: any; classes: any[] }) => {
     <form className="flex gap-2.5 mt-4 text-black" onSubmit={handleSubmit}>
       <Select onValueChange={(value) => setSelectedClass(value)}>
         <SelectTrigger>
-          <SelectValue placeholder="Select the class" className="text-black" />
+          <SelectValue placeholder="Select the Class" className="text-black" />
         </SelectTrigger>
         <SelectContent className="text-black">
           {classes.map((each: any) => {

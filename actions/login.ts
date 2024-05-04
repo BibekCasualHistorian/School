@@ -30,8 +30,6 @@ export const login = async (values: z.infer<typeof loginSchema>) => {
   // verification in sent in email
   const existingUser = await getSingleUserByEmail(email);
 
-  console.log("existingUser in server action in login.ts", existingUser);
-
   // this is for if user doesn't exist and just below it we have
   // for if user exist but isn't verified
   if (!existingUser || !existingUser.password || !existingUser.email) {

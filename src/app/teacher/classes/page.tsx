@@ -1,6 +1,8 @@
 import React from "react";
-import { db } from "../../../../../lib/db";
-import { currentUser } from "../../../../../lib/auth";
+import { currentUser } from "../../../../lib/auth";
+import { db } from "../../../../lib/db";
+
+export const revalidate = 0;
 
 const page = async () => {
   const user = await currentUser();

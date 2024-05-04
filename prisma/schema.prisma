@@ -16,6 +16,13 @@ generator client {
   provider = "prisma-client-js"
 }
 
+enum UserRole {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+// MONGODB IMPLEMENTATION
 model Account {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   userId             String  @db.ObjectId
@@ -37,12 +44,6 @@ model Account {
 
 // we will not copy session and veriticationtoken from next.js 
 
-enum UserRole {
-  ADMIN
-  TEACHER
-  STUDENT
-}
-
 model School {
    id    String @id @default(auto()) @map("_id") @db.ObjectId
   name      String
@@ -58,8 +59,7 @@ model Teacher {
 
     adminId String? @db.ObjectId
   user User? @relation(fields: [adminId],references: [id])
-  // school      School    @relation(fields: [schoolId], references: [id])
-  // schoolId    String  @db.ObjectId
+
   groups     Group[]
 }
 
@@ -97,16 +97,13 @@ model Group {
   
   classId String? @db.ObjectId
   class Class? @relation(fields: [classId], references: [id])
-  // school      School    @relation(fields: [schoolId], references: [id])
-  // schoolId    String
+
   teacherId   String? @db.ObjectId
   teacher     Teacher?  @relation(fields: [teacherId], references: [id])
 
-  
   adminId String? @db.ObjectId
   user User? @relation(fields: [adminId],references: [id])
 
-  // students    Student[]
 }
 
 model User {
@@ -161,3 +158,24 @@ model Verificationtoken {
 
   @@unique([email, token])
 }
+
+// POSTGRES IMPLEMENTATION
+// model Account {
+//   id                 String  @id @default(cuid())
+//   userId             String  @map("user_id")
+//   type               String
+//   provider           String
+//   providerAccountId  String  @map("provider_account_id")
+//   refresh_token      String? @db.Text
+//   access_token       String? @db.Text
+//   expires_at         Int?
+//   token_type         String?
+//   scope              String?
+//   id_token           String? @db.Text
+//   session_state      String?
+ 
+//   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+ 
+//   @@unique([provider, providerAccountId])
+//   @@map("accounts")
+// }

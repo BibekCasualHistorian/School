@@ -2,6 +2,13 @@
 import React, { useState } from "react";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
 
 const AddStudent = ({ userId, classes }: { userId: any; classes: any[] }) => {
   const [firstName, setFirstName] = useState<string>("");
@@ -42,17 +49,25 @@ const AddStudent = ({ userId, classes }: { userId: any; classes: any[] }) => {
   };
   return (
     <form className="flex gap-2.5 mt-4" onSubmit={handleSubmit}>
-      <select
-        onChange={(e) => setSelectedClass(e.target.value)}
-        className="rounded-xl flex-1 text-black "
-      >
-        <option value={undefined}>Select any</option>
-        {classes.map((each: any) => (
-          <option key={each.id} value={each.id}>
-            {each.name}
-          </option>
-        ))}
-      </select>
+      <Select onValueChange={(value) => setSelectedClass(value)}>
+        <SelectTrigger>
+          {/* <SelectValue placeholder="Select the class" /> */}
+          <SelectValue placeholder="Select the class" />
+        </SelectTrigger>
+        <SelectContent className="text-black">
+          {classes.map((each: any) => {
+            return (
+              <SelectItem
+                key={each.id}
+                value={each.id}
+                onChange={(e) => setSelectedClass(each.id)}
+              >
+                {each.name}
+              </SelectItem>
+            );
+          })}
+        </SelectContent>
+      </Select>
       <Input
         placeholder="Type the firstName name"
         value={firstName}

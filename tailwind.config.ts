@@ -24,6 +24,7 @@ const config = {
         activeTextColor: "#e8e8e9",
         primaryTextColor: "#ffffff",
         secondaryTextColor: "#a0a0a9",
+        backgroundTextColor: "#71717a",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

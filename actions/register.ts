@@ -6,19 +6,16 @@ import bcrypt from "bcryptjs";
 
 import { RegisterSchema } from "../schemas";
 import { db } from "../lib/db";
-import { getSingleUserByEmail } from "../lib/utilsSearch";
+import {
+  checkWhetherStudentIsAddedInDatabaseByAdmin,
+  checkWhetherTeacherIsAddedInDatabaseByAdmin,
+  getSingleUserByEmail,
+} from "../lib/utilsSearch";
 import { generateVerificationToken } from "../lib/token";
 import { sendVerificationEmail } from "../lib/mail";
 
 export const register = async (values: z.infer<typeof RegisterSchema>) => {
   const validatedFields = RegisterSchema.safeParse(values);
-
-  // await db.user.deleteMany({
-  //   where: {
-  //     name: "Cultural Archer",
-  //   },
-  // });
-  // return;
 
   if (!validatedFields.success) {
     return { success: false, error: "Invalid Credentials" };
@@ -26,6 +23,13 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
   const { email, password, name } = validatedFields.data;
   console.log(email, password, name);
+  if (
+    (await checkWhetherStudentIsAddedInDatabaseByAdmin(email)) ||
+    (await checkWhetherTeacherIsAddedInDatabaseByAdmin(email))
+  ) {
+    return { success: false, error: "Sorry, You need to contact to Admin" };
+  }
+
   const hash = await bcrypt.hash(password, 10);
 
   const alreadyExists = await getSingleUserByEmail(email);

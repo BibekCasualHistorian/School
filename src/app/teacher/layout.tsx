@@ -27,7 +27,6 @@ const navItems = [
   { icon: <FaSchool />, label: "Students", href: `/${route}/students` },
   { icon: <FaCalendarAlt />, label: "Events", href: `/${route}/events` },
   { icon: <FaBell />, label: "Notices", href: `/${route}/notices` },
-  { icon: <FaBell />, label: "Inbox", href: `/${route}/inboxes` },
 ];
 
 const SchoolLayouts = ({ children }: SchoolLayoutsPorps) => {
