@@ -54,7 +54,7 @@ const AllInboxForStudents = ({ users }: { users: any }) => {
         {users.map((each: any, index: number) => (
           <Link
             key={index}
-            href={`/student/inboxes/${each.id}/${"real"}`}
+            href={`/student/inboxes/${each.id}`}
             className={`mr-4  w-full flex items-center gap-3 p-4 rounded-xl  hover:bg-secondaryBackgroundColor ${
               params.userId == each.id ? "bg-secondaryBackgroundColor" : ""
             }`}

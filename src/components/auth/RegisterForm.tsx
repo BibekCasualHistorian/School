@@ -35,10 +35,15 @@ const RegisterForm = () => {
   const handleSubmit = (values: z.infer<typeof RegisterSchema>) => {
     setTransition(() => {
       register(values).then((data) => {
-        console.log(data);
-        setSuccess(data.message);
-        setError(data.error);
-        // login()
+        login(values).then((data) => {
+          console.log(data);
+
+          if (data?.success) {
+            setSuccess(data?.message);
+          } else {
+            setError(data?.error);
+          }
+        });
       });
     });
   };

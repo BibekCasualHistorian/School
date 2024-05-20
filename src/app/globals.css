@@ -6,6 +6,13 @@ main {
   background: radial-gradient(circle at center, rgb(5, 3, 5), rgb(0, 0, 0));
 }
 
+.overflow-chat {
+  background: red;
+  max-height: calc(100% - 100px);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

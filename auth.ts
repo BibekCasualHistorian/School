@@ -21,15 +21,15 @@ export const {
     signIn: "/auth/login", // will redirect to this route when something goes wrong
     error: "/auth/error", // will redirect to if we have error
   },
-  // events: {
-  //   async linkAccount({ user }) {
-  //     await db.user.update({
-  //       where: { id: user.id },
-  //       data: { emailVerified: new Date() },
-  //     });
-  //     // to know if user used OAUTH or not
-  //   },
-  // },
+  events: {
+    async linkAccount({ user }) {
+      await db.user.update({
+        where: { id: user.id },
+        data: { emailVerified: new Date() },
+      });
+      // to know if user used OAUTH or not
+    },
+  },
   callbacks: {
     // async signIn({ user }) {
     //   const existingUser = await getSingleUserById(user.id);
@@ -56,32 +56,32 @@ export const {
         return false;
       }
 
-      const existingUser = await getSingleUserById(user.id);
-      // console.log("existingUser in signIn auth.ts", existingUser);
-      if (!existingUser?.emailVerified) {
-        // means we refuse signing in of user
-        return false;
-      }
+      // const existingUser = await getSingleUserById(user.id);
+      // // console.log("existingUser in signIn auth.ts", existingUser);
+      // if (!existingUser?.emailVerified) {
+      //   // means we refuse signing in of user
+      //   return false;
+      // }
 
       // we don't want usser to sign in directly if twofactorenabled is false
-      if (existingUser.isTwoFactorEnabled) {
-        const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
-          existingUser.id
-        );
-        // console.log("twoFactorConfirmation in auth.ts", twoFactorConfirmation);
-        if (!twoFactorConfirmation) {
-          return false;
-        }
+      // if (existingUser.isTwoFactorEnabled) {
+      //   const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(
+      //     existingUser.id
+      //   );
+      //   // console.log("twoFactorConfirmation in auth.ts", twoFactorConfirmation);
+      //   if (!twoFactorConfirmation) {
+      //     return false;
+      //   }
 
-        // delete two factor confirmation for next sign In
-        await db.twoFactorConfirmation.delete({
-          where: {
-            id: twoFactorConfirmation.id,
-          },
-        });
+      //   // delete two factor confirmation for next sign In
+      //   await db.twoFactorConfirmation.delete({
+      //     where: {
+      //       id: twoFactorConfirmation.id,
+      //     },
+      //   });
 
-        // Delete two factor confirmation for next sign in
-      }
+      //   // Delete two factor confirmation for next sign in
+      // }
 
       return true; // means we allowed to signIn
     },

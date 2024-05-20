@@ -9,11 +9,15 @@ interface InboxesPorps {
 }
 const Inboxes = async ({ children }: InboxesPorps) => {
   const user = await currentUser();
-  const users = await db.user.findMany({});
+  const receipent = await db.user.findMany({});
+  console.log("receipent", receipent);
+  const receipents = receipent.filter((each: any) => {
+    return each.id != user?.id;
+  });
   return (
     <div className=" rounded-xl border-white border min-h-screen grid grid-cols-7 gap-2">
       <div className="col-span-3">
-        <AllInbox users={users} />
+        <AllInbox receipents={receipents} />
       </div>
       <div className="col-span-4">{children}</div>
     </div>

@@ -91,8 +91,6 @@ model Teacher {
   groupLinks GroupTeacher[]
 }
 
-
-
 model Group {
   id    String @id @default(auto()) @map("_id") @db.ObjectId
   name String
@@ -107,6 +105,10 @@ model Group {
   user User? @relation(fields: [adminId],references: [id])
 
   teacherLinks GroupTeacher[]
+}
+enum Role {
+  ADMIN
+  MEMBER
 }
 
 model GroupTeacher {
@@ -126,6 +128,10 @@ model User {
   emailVerified DateTime?
   image         String?
   password      String?
+  // members   Member[]
+  // messages Message[]
+  // conversationIds String[]   @db.ObjectId
+  // conversation  Conversation[] @relation(fields: [conversationIds], references: [id])
   accounts      Account[] 
   group Group[]
   teacher Teacher[]
@@ -136,6 +142,78 @@ model User {
   isTwoFactorEnabled Boolean @default(false)
   twoFactorConfirmation TwoFactorConfirmation?
 }
+
+
+// model Member {
+//   id             String       @id @unique @default(uuid())
+//   messages       Message[]
+//   joinedAt       DateTime     @default(now())
+//   userId         String
+//   user           User         @relation(fields: [userId], references: [id])
+//   conversationId String
+//   conversations  Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+//   role           Role         @default()
+// }
+
+// model Conversation {
+//   id         String    @id @unique @default(uuid())
+//   isGroup    Boolean?  @default(false)
+//   groupTitle String?   @db.Text
+//   members    Member[]
+//   messages   Message[]
+//   type       Type?
+//   createdAt  DateTime  @default(now())
+//   updatedAt  DateTime  @updatedAt
+// }
+
+// model Message {
+//   id             String       @id @unique @default(uuid())
+//   body           String?      @db.Text
+//   conversationId String
+//   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+//   senderId       String
+//   sender         Member       @relation(fields: [senderId], references: [id], onDelete: Cascade)
+//   createdAt      DateTime     @default(now())
+//   updatedAt      DateTime     @updatedAt
+//   fileId         String?
+//   fileUrl        String?
+// }
+
+// model Member {
+//   id    String @id @default(auto()) @map("_id") @db.ObjectId
+
+//   messages       Message[]
+//   joinedAt       DateTime     @default(now())
+//   userId         String @db.ObjectId
+//   user           User         @relation(fields: [userId], references: [id])
+//   conversationId String @db.ObjectId
+//   conversations  Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+//   // role           Role         @default(MEMBER)
+// }
+
+// model Conversation {
+//   id    String @id @default(auto()) @map("_id") @db.ObjectId
+//   isGroup    Boolean?  @default(false)
+//   groupTitle String?   @db.String
+//   members    Member[]
+//   messages   Message[]
+//   type       Type?
+//   createdAt  DateTime  @default(now())
+//   updatedAt  DateTime  @updatedAt
+// }
+
+// model Message {
+//   id    String @id @default(auto()) @map("_id") @db.ObjectId
+//   body           String?      @db.String
+//   conversationId String @db.ObjectId
+//   conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+//   senderId       String @db.ObjectId
+//   sender         Member       @relation(fields: [senderId], references: [id], onDelete: Cascade)
+//   createdAt      DateTime     @default(now())
+//   updatedAt      DateTime     @updatedAt
+//   fileId         String?
+//   fileUrl        String?
+// }
 
 model PasswordResetToken {
   id    String @id @default(auto()) @map("_id") @db.ObjectId

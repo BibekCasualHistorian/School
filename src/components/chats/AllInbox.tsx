@@ -1,14 +1,32 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { FaHamburger, FaUser } from "react-icons/fa";
+import React, { useEffect } from "react";
+import { FaUser } from "react-icons/fa";
 import { Input } from "../ui/input";
 import { useParams } from "next/navigation";
+import { useCurrentUser } from "../../../hooks/use-current-user";
 
-const AllInbox = ({ users }: { users: any }) => {
+const AllInbox = ({ receipents }: { receipents: any }) => {
   const params = useParams();
-  console.log("params", params); // Example chat URLs
+  const user = useCurrentUser();
+  // console.log("params", params); // Example chat URLs
+
+  // console.log("receipt", receipents);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await fetch(
+  //       "http://localhost:3000/api/conversation/create",
+  //       { method: "POST", body: JSON.stringify({}) }
+  //     );
+  //     const data = await response.json();
+  //     if (response.ok) {
+  //       console.log("data", data);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   return (
     <div className="border-r-2 h-full  border-gray-300 p-2.5 ">
@@ -51,22 +69,28 @@ const AllInbox = ({ users }: { users: any }) => {
       </div>
 
       <div className="space-y-2 mt-2">
-        {users.map((each: any, index: number) => (
+        {receipents.map((each: any, index: number) => (
           <Link
             key={index}
-            href={`/admin/inboxes/${each.id}/${"real"}`}
+            href={`/admin/inboxes/${each.id}`}
             className={`mr-4  w-full flex items-center gap-3 p-4 rounded-xl  hover:bg-secondaryBackgroundColor ${
               params.userId == each.id ? "bg-secondaryBackgroundColor" : ""
             }`}
           >
             <div className="min-w-10  relative">
-              <Image
-                src={each.image}
-                alt="User Image"
-                width={40}
-                height={40}
-                className="rounded-full"
-              />
+              {each.image ? (
+                <Image
+                  src={each.image}
+                  alt="User Image"
+                  width={40}
+                  height={40}
+                  className="rounded-full"
+                />
+              ) : (
+                <div className="w-[40px] h-[40px] rounded-full bg-blue-500 flex items-center justify-center">
+                  <FaUser className="" />
+                </div>
+              )}
               <span
                 style={{ top: "-6px", right: "-6px" }}
                 className=" border-2 border-black rounded-full w-6 h-6 flex justify-center items-center font-bold text-xs text-white absolute bg-pink-700"

@@ -12,7 +12,7 @@ const Navbar = () => {
   const user = useCurrentUser();
   // console.log("user", user);
   const pathname = usePathname();
-  console.log("pathname", pathname);
+  // console.log("pathname", pathname);
   return (
     <RoundedCard
       isHeader
