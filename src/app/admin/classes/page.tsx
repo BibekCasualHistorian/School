@@ -15,6 +15,7 @@ const page = async () => {
         return (
           <RoundedCard key={index} className="p-2 bg-mainBackgroundColor">
             <h1>Class name: {each.name}</h1>
+            <p>Start time : 9.00</p>
           </RoundedCard>
         );
       })}

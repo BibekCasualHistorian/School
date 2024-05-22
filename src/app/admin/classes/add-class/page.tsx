@@ -14,6 +14,7 @@ const Page = () => {
   console.log("searchParams", searchParams);
   const [name, setName] = useState<string>("");
   const [error, setError] = useState<string | undefined>(undefined);
+
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(name, user?.id);
@@ -37,20 +38,25 @@ const Page = () => {
       setError(error.message || "An error occurred");
     }
   };
+
   return (
-    <form className="flex gap-2.5 mt-4" onSubmit={handleSubmit}>
-      <Input
-        placeholder="Type the class name"
-        value={name}
-        type="text"
-        className="text-black"
-        onChange={(e: any) => setName(e.target.value)}
-      />
-      {/* <Input /> */}
-      <Button size={"lg"} type="submit">
-        Submit
-      </Button>
-    </form>
+    <>
+      <form className="flex gap-2.5 mt-4" onSubmit={handleSubmit}>
+        <Input
+          placeholder="Type the class name"
+          value={name}
+          type="text"
+          // required
+          className="text-black"
+          onChange={(e: any) => setName(e.target.value)}
+        />
+        {/* <Input /> */}
+        <Button size={"lg"} type="submit">
+          Submit
+        </Button>
+      </form>
+      {error && <p className="text-rose-500 font-bold text-xl">{error}</p>}
+    </>
   );
 };
 

@@ -38,6 +38,7 @@ const AddTeacher = ({
     const url = new URL(baseUrl);
     url.searchParams.append("adminId", userId);
     console.log("url", url.href);
+
     try {
       const response = await fetch(url.href, {
         method: "POST",

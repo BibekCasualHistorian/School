@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useState, useTransition } from "react";
 import CardWrapper from "./CardWrapper";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -39,7 +39,7 @@ const RegisterForm = () => {
           console.log(data);
 
           if (data?.success) {
-            setSuccess(data?.message);
+            setSuccess(data?.message || "Success");
           } else {
             setError(data?.error);
           }
@@ -52,7 +52,7 @@ const RegisterForm = () => {
       headerLabel="Create a New Card"
       backButtonHref="/auth/login"
       backButtonLabel="Login with your existing account?"
-      showSocial
+      // showSocial
     >
       <Form {...form}>
         <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
